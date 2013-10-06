@@ -20,6 +20,7 @@ class Pastebin
 {
 	var $conf=null;
 	var $db=null;
+    var $errors=array();
 	
 	// Constructor expects a configuration array which should contain the elements documented in config.php
 	function Pastebin(&$conf)
@@ -96,7 +97,6 @@ class Pastebin
 	function doPost(&$post)
 	{
 		$id=0;
-		$this->errors=array();
       
       // reCAPTCHA.
       if ($this->conf['useRecaptcha']) {
@@ -114,7 +114,7 @@ class Pastebin
 		$post["expiry"]=$this->_cleanExpiry($post["expiry"]);
 			
 		// Set/clear the persistName cookie.
-		if ($post["remember"])
+		if (isset($post["remember"]))
 		{
 			$value=$post["poster"].'#'.$post["format"].'#'.$post['expiry'];
 			
@@ -165,8 +165,11 @@ class Pastebin
 	function getPasteURL($id)
 	{
 		global $CONF;
-		if ( $mod_rewrite == true ) { return sprintf($this->conf['pid_format'], $id); } else {
-		return sprintf("./?paste=".$this->conf['pid_format'], $id);}
+		if ( isset($mod_rewrite) && $mod_rewrite == true ) { 
+            return sprintf($this->conf['pid_format'], $id); 
+        } else {
+            return sprintf("./?paste=".$this->conf['pid_format'], $id);
+        }
 	}
 
 	function redirectToPost($id)
