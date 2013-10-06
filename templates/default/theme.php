@@ -21,6 +21,7 @@
 	<ul class="tabs">
 	 <li><a href="<?php echo $CONF['url']?>" title="Submit a new paste">Submit</a></li>
      <li><a href="<?php echo $CONF['url']?>?archive" title="List all public pastes">Archive</a></li>
+	 <li><a href="<?php echo $CONF['url']?>?account" title="Login/Register">Login/Register</a></li>
 	</ul>
 </div>
 <div id="menu">
@@ -104,7 +105,7 @@ function showMe()
 	}
 	if (isset($page['post']['pid']))
 	{
-		echo "<div id=\"syntax\">".$page['post']['codefmt']."</div>";
+		echo "<div id=\"syntax\" style=\"overflow-x:scroll;overflow-y:auto;\">".$page['post']['codefmt']."</div>";
 	}
 }
 
@@ -114,11 +115,11 @@ $postPass = $_POST['thePassword'];
 if ($pid >0)
 {
 	global $pid;
-    $db = new DB;
-    $newPID = $db->_escape_string($pid);
-    $result = $db->_query("SELECT * from paste where pid = " . $newPID);
-    $row = $db->_fetch_array($result);
-
+	mysql_connect($CONF['dbhost'], $CONF['dbuser'], $CONF['dbpass']) or die(mysql_error());
+	$newPID = mysql_real_escape_string($pid);
+	mysql_select_db($CONF['dbname']) or die(mysql_error());
+	$result = mysql_query("SELECT * from paste where pid = " . $newPID);
+	$row = mysql_fetch_array($result);
 	$pass = $row['password'];
 
 	if (isset($pass) && ($pass != "EMPTY"))
@@ -145,33 +146,34 @@ if ($pid >0)
 	else {
    	showMe();
 	}
-	
+	mysql_close();
 }
 if (isset($_GET['archive']))
 {
 	?>
 	<h1>Archive (This could take a while to load)</h1>
 	<?php
-
-    $db = new DB;
-	$pastes = $db->_query("SELECT * FROM paste ORDER BY posted DESC");
-
-
+	mysql_connect($CONF['dbhost'], $CONF['dbuser'], $CONF['dbpass']) or die(mysql_error());
+	mysql_select_db($CONF['dbname']) or die(mysql_error());
+	$pastes = mysql_query("SELECT * FROM paste ORDER BY posted DESC");
+	
 	echo "<table class=\"archive\">";
 	echo "<tr><th></th><th>Name</th><th class=\"padright\">Language</th><th>Posted on</th><th>Expires</th></tr>";
-	while ($row = $db->_fetch_array($pastes))
+	
+	while ($row = mysql_fetch_array($pastes))
 	{
-        $pass = ($row['password'] == "EMPTY") ? "" : "<img src=\"templates/default/images/lock.png\" title=\"Password protected\" />";
-        echo "<tr>";
-        echo "<td>" . $pass . "</td>";
+      $pass = ($row['password'] == "EMPTY") ? "" : "<img src=\"templates/default/images/lock.png\" title=\"Password protected\" />";
+		echo "<tr>";
+      echo "<td>" . $pass . "</td>";
 		echo "<td class=\"padright\"><a title=\"" . date("l F j, Y, g:i a", strtotime($row['posted'])) . "\" href=\"". $CONF['pastebin'] . "/" . $row['pid'] . "\">" . $row['poster'] . "</a></td>";
 		echo "<td>" . $CONF['geshiformats'][$row['format']] . "</td>";
-        echo "<td class=\"padright\">" . date("m-d-y, g:i A", strtotime($row['posted'])) . "</td>";
-        echo "<td>" . ((is_null($row['expires'])) ? "Never" : date("m-d-y, g:i A", strtotime($row['expires'])))  . "</td>";
+      echo "<td class=\"padright\">" . date("m-d-y, g:i A", strtotime($row['posted'])) . "</td>";
+      echo "<td>" . ((is_null($row['expires'])) ? "Never" : date("m-d-y, g:i A", strtotime($row['expires'])))  . "</td>";
 		echo "</tr>";
 	}
-
+	
 	echo "</table>";
+	mysql_close();
 }
 else
 {
@@ -224,7 +226,7 @@ foreach ($CONF['geshiformats'] as $code=>$name)
 <!-- The expiry buttons -->
 <div id="expirybox">
   <div id="expiryradios"><label>How long should we keep your paste?</label><br/> 
-   <input type="radio" id="expiry_day" name="expiry" value="d"   <?php if ($page['expiry']=='d') echo 'checked="checked"'; ?> /> <label id="expiry_day_label" for="expiry_day">One day</label>
+   <input type="radio" id="expiry_day" name="expiry" value="d" /> <?php if ($page['expiry']=='d') echo 'checked="checked"'; ?> <label id="expiry_day_label" for="expiry_day">One day</label>
    <input type="radio" id="expiry_month" name="expiry" value="m" <?php if ($page['expiry']=='m') echo 'checked="checked"'; ?> /> <label id="expiry_month_label" for="expiry_month">One month</label>
    <input type="radio" id="expiry_forever" name="expiry" value="f" <?php if ($page['expiry']=='f') echo 'checked="checked"'; ?> /> <label id="expiry_forever_label" for="expiry_forever">Forever</label>
   </div>

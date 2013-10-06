@@ -1,18 +1,32 @@
-$ID PROJECT: Paste - README.txt, v1, EcKstasy - 17/03/2010/08:47 GMT+1 (dd/mm/yy/time)
+$ID Project: Paste 2.0 - J.Samuel - 06/10/2013 @ 07:04 (Coffee please!)
 
-Requirements: PHP, MySQL
+Requirements: PHP : MySQL or PostgreSQL
 
-1.1> Create a database for the pastebin.
-1.2> Add the tables to the database (paste.sql)
-2> Edit the configuration file to suit your needs (config.php)
-3> Upload all of the files to the webserver.
-If you want to use Apache's mod_rewrite for pastes,
-simply edit htaccess.txt to suit your needs and rename it to .htaccess
+Manual Install
+1.1> Create a database for PASTE.
+1.2> Add the tables to the database (located in sql files, match the file to your DB software)
+
+
+The configuration file is pretty well documented (config.php)
+so you shouldn't have any problems with it.
   
-If you find any bugs, which is highly doubtful; file a bug report at either:
+Any bugs can be reported at:
 https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
-or http://bitbucket.org/eckstasy/paste/issues/new/
+or http://bitbucket.org/j-samuel/paste/issues/new/
 
-You can find support on IRC by connecting to irc.freenode.net in channel ##PASTE
+Just to name a few changes in this version.
+* Sleek new theme built using jQuery & Bootstrap
+* Passwords are no longer stored as plain text (and, in the future pastes won't be either)
+* Links are no longer broken if htaccess/mod_rewrite isn't available (see config)
+	
+Over the coming months we should see the placeholder folders & files filled with new features.
 
-Find our other web projects at http://escriptirc.com/
+You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
+
+* CREDITS
+Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
+Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, (archives which are now being reworked on and password protection)
+Roberto Rodríguez (rodpin@gmail.com) for PostgreSQL support.
+
+jQuery, Twitter Bootstrap and various jQuery addons for present and future features.
+Icons are provided by fontawesome.

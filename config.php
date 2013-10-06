@@ -1,7 +1,8 @@
 <?php
 /*
-* $ID config.php, v1 EcKstasy - 16/03/2010/00:00 GMT+1 (dd/mm/yy/time) 
-* 
+* $ID Project: Paste 2.0 - J.Samuel - 29/09/2013 @ 04:11 (Coffee please!)
+* This is the configuration file for paste. See /docs for more information.
+*
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 3
@@ -10,46 +11,50 @@
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
+* GNU General Public License in LIC.txt for more details.
 */
  
-// MySQL database
+// Database information
 $CONF['dbhost']='localhost';
-$CONF['dbname']='mysqldatabase';
-$CONF['dbuser']='mysqluser';
-$CONF['dbpass']='databasepassword';
+$CONF['dbname']='pastedev';
+$CONF['dbuser']='user';
+$CONF['dbpass']='password';
 
-// This should be the URL to your pastebin. eg: http://paste.info.tm/ or http://paste.info.tm/subdir/
-$CONF['url']='http://paste.info.tm/';// Make sure you end it with a forward slash! (/)
+// These extra databases are supported: postgresql
+$CONF['dbsoftware']='mysql';
 
-// What is the name of the template you want to use (the folder as displayed in /templates/)
+// This should be the entire URL to your PASTE installation.
+$CONF['url']='http://pastethis.in/'; // Make sure you end it with a slash! (/)
+// And the title
+$CONF['sitetitle']='Paste 2.0';
+
+// Enable mod_rewrite? remember to move htaccess.txt to .htaccess!
+$mod_rewrite=false;
+
+// What is the name of the template you want to use for the frontend (the folder name as displayed in /templates/)
 $CONF['template']='default';
 
-// Site title (Appears in the <title></title> tags)
-$CONF['title']='PASTE - The name says it all.';
-
-// Do you want to enable reCAPTCHA support on your pastebin? false = no, true = yes
+// Enable reCAPTCHA to help prevent spambots?
 $CONF['useRecaptcha'] = false;
-// Get your keys at http://recaptcha.net/
-$CONF['pubkey']='yourpublickey';
-$CONF['privkey']='yourprivatekey';
+// Get your keys at http://www.google.com/recaptcha
+$CONF['pubkey']='public-key-here';
+$CONF['privkey']='private-key-here';
+
+// This is a random string used for extra security for passwords (slows down dictionary attacks for really weak passwords)
+// Generate new random salts at http://mkpasswd.net/
+$salt='c7428522a9f84320ad63275162904a';
 
 /* 
-* Format of the URLs to the pastebin entries. %d = Entry ID.
-* If you're using Apache's mod_rewrite you'd use something like this: $CONF['url_format']="%d";
-* If you're not using mod_rewrite, you'll need to use something like:
-* $CONF['url_format']="?show=%d";
+* You can set the format of the paste ID here which will be used in URLs.
+* Examples: http://php.net/manual/en/function.sprintf.php
 */
-$CONF['url_format']='%d';
+$CONF['pid_format']='%d';
 
 // Default expiry time - d (day), m (month), and f (forever).
 $CONF['default_expiry']='f';
 
 // The maximum number of posts you want to keep. Keep this as-is if you want no limits.
 $CONF['max_posts']=0;
-
-// What's the character you want to use for highlighting certain lines in pastes?
-$CONF['highlight_prefix']='@@';
 
 // Default syntax highlight for pastes.
 $CONF['default_highlighter']='text';
@@ -145,7 +150,6 @@ $CONF['geshiformats']=array(
 	'oracle11'=>'Oracle 11i',
 	'oracle8'=>'Oracle 8',
 	'pascal'=>'Pascal',
-	'pawn'=>'Pawn',
 	'per'=>'Per (forms)',
 	'perl'=>'Perl',
 	'php-brief'=>'PHP (Brief version)',
@@ -197,9 +201,18 @@ $CONF['geshiformats']=array(
 );
 
 // The formats that are listed first.
-$CONF['popular_syntax']=array(
+$CONF['popular_formats']=array(
 	'text','bash','html4strict', 'css', 'javascript', 'php',
 	'perl','python','sql','ruby', 'rails', 'tcl', 'xml',
 	'whois','xorg_conf','java','apt_sources','mirc','c','cpp',
 );
+
+/*
+You're not advised to change this if you don't have any JS experience.
+The new default theme will take care of this for you (a button to append the highlight prefix to selected lines)
+But, we've kept this here if you wish to change the prefix, you can change the values located in paste.js on function highlight(e)
+Don't forget to change 11 (the length of the default prefix) to the new length of the prefix you wish to use.
+-->*/ $CONF['highlight_prefix']='!highlight!';
+
+// END OF CONFIGURATION FILE
 ?>

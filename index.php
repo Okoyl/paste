@@ -1,6 +1,6 @@
 <?php
 /*
-* $ID PROJECT: Paste - index.php, v1 EcKstasy - 17/03/2010/06:29 GMT+1 (dd/mm/yy/time) 
+* $ID PROJECT: Paste - index.php, v2 J.Samuel - 10/03/2013 GMT+1 (dd/mm/yy/)
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -14,10 +14,10 @@
 */
 
 // Includes
-require_once('classes/config.inc.php');
-require_once('classes/geshi/geshi.php');
-require_once('classes/diff.php');
-require_once('classes/paste.php');
+require_once('includes/config.inc.php');
+require_once('includes/libraries/geshi.php');
+require_once('includes/diff.php');
+require_once('includes/paste.php');
 
 // Magic quotes are anything but magic - lose them!
 if (get_magic_quotes_gpc())
@@ -102,9 +102,9 @@ $list=isset($_REQUEST["list"]) ? intval($_REQUEST["list"]) : 10;
 $page['recent']=$pastebin->getRecentPosts($list);
 
 // Show a post.
-if (isset($_REQUEST["show"]))
+if (isset($_REQUEST["paste"]))
 {
-	$pid=intval($_REQUEST['show']);
+	$pid=intval($_REQUEST['paste']);
 	// Get the post.
 	$page['post']=$pastebin->getPaste($pid);
 	// Ensure corrent format is selected.
@@ -118,12 +118,14 @@ else
 if ($page['current_format']!='text')
 {
 	// Give the page a title which features the syntax used.
-	$page['title']=$CONF['geshiformats'][$page['current_format']] . " - ".$CONF['title'];
+	$page['title']=$CONF['geshiformats'][$page['current_format']] . " - ".$CONF['sitetitle'];
 }
 else
 {
-	$page['title']=$CONF['title'];
+	$page['title']=$CONF['sitetitle'];
 }
 
 // HTML page output.
-include('templates/'.$CONF['template'].'/theme.php');
+include('templates/'.$CONF['template'].'/header.php');
+include('templates/'.$CONF['template'].'/main.php');
+include('templates/'.$CONF['template'].'/footer.php');
