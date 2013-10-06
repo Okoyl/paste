@@ -1,5 +1,7 @@
 $ID Project: Paste 2.0 - J.Samuel - 06/10/2013 @ 07:04 (Coffee please!)
 
+Demo: http://phpaste.sourceforge.net/demo/
+
 Requirements: PHP : MySQL or PostgreSQL
 
 Manual Install
