@@ -208,7 +208,6 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 				<script src="http://korylprince.github.io/reCAPTCHA_Responsive/recaptcha_mobile.min.js"></script>
 				<script> var RecaptchaOptions = { theme : 'clean' }; </script>
 				<?php echo recaptcha_get_html($CONF['pubkey'])."\n"; ?><br />
-				<button class="btn" type="submit" name="paste"><i class="icon-arrow-right"></i> Submit</button></p>
 				<?php } ?>
 				<p><button class="btn" type="submit" name="paste"><i class="icon-arrow-right"></i> Submit</button></p>
 			</div>
@@ -221,7 +220,7 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 			<div class="well no-padding" id="pagination-activity">
 				<div class="list-widget pagination-content">
 				<?php foreach($page['recent'] as $idx=>$entry) {
-					if ($entry['pid']==$pid) $cls="background-color: #CCCCCC;";
+					if ($entry['pid']==$pid) $cls="background-color: #dbdbdb;";
 					else $cls="";?>
 				<div class="item" style="display: block; <?php echo $cls;?>">
 					<small class="pull-right"><?php echo $entry['agefmt'];?></small>
