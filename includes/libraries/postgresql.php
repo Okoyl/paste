@@ -166,7 +166,9 @@ class DB
 			$args=func_get_args();
 			for ($i=1; $i<=count($args); $i++)
 			{
-				$sql=preg_replace("/$q/", "'".preg_quote(pg_escape_string($args[$i]))."'", $sql,1);
+                if(isset($args[$i])){
+                    $sql=preg_replace("/$q/", "'".preg_quote(pg_escape_string($args[$i]))."'", $sql,1);
+                }
 				
 			}
 			// We shouldn't have any $q left, but it will help debugging if we change them back!
