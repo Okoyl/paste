@@ -62,19 +62,13 @@ if (isset($_GET['dl']))
    if (isset($_GET['pass']))
       $getPass = $_GET['pass'];
 	$pid=intval($_GET['dl']);
-   // If password protected, don't allow to download it.
-   mysql_connect($CONF['dbhost'], $CONF['dbuser'], $CONF['dbpass']) or die(mysql_error());
-	$newPID = mysql_real_escape_string($pid);
-	mysql_select_db($CONF['dbname']) or die(mysql_error());
-	$result = mysql_query("SELECT * from paste where pid = " . $newPID);
+    $result = $pastebin->getPaste($pid);
    
    if ($result == FALSE) {
       echo "Paste $pid is not available.";
       exit;
    }
-   
-   $row = mysql_fetch_array($result);
-	$pass = $row['password'];
+    $pass = $result['password'];
 
    if ($pass == 'EMPTY') {
       $pastebin->doDownload($pid);

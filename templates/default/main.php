@@ -7,7 +7,9 @@ $page['post']['editcode']=$_POST['code2'];
 $page['current_format']=$_POST['format'];
 $page['expiry']=$_POST['expiry'];
 	if ($_POST['password'] != 'EMPTY') { $page['post']['password']=$_POST['password']; }
-$page['poster']=$_POST['poster'];
+$page['poster']="";
+if(isset($_POST['poster'])){ $page['poster']=$_POST['poster']; }
+
 }
 
 // Show a paste
@@ -73,16 +75,15 @@ function showMe() {
 } // End showing of a paste
 
 // Check for a password
-$postPass = $_POST['password'];
+$postPass = null;
+if(isset($_POST['password'])){ $postPass = $_POST['password']; }
 
-if ($pid >0) {
+
+
+if (isset($pid) && $pid >0) {
 	global $pid;
-	mysql_connect($CONF['dbhost'], $CONF['dbuser'], $CONF['dbpass']) or die(mysql_error());
-	$newPID = mysql_real_escape_string($pid);
-	mysql_select_db($CONF['dbname']) or die(mysql_error());
-	$result = mysql_query("SELECT * from paste where pid = " . $newPID);
-	$row = mysql_fetch_array($result);
-	$pass = $row['password'];
+    $result = $pastebin->getPaste($pid);
+    $pass = $result['password'];
 
 if (isset($pass) && ($pass != "EMPTY")) { if (!isset($postPass)) { ?>
 			
@@ -116,7 +117,7 @@ if (isset($pass) && ($pass != "EMPTY")) { if (!isset($postPass)) { ?>
 </div>
 
 <?php }
-	} else { showMe(); } mysql_close();
+	} else { showMe(); }
 }; // End password page
 
 if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
@@ -124,7 +125,7 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 <div class="row-fluid">
 	<div class="span8">
 	<form name="editor" method="post" action="index.php">
-	<input type="hidden" name="parent_pid" value="<?php echo $page['post']['pid'] ?>"/>
+	<input type="hidden" name="parent_pid" value="<?php if(isset($page['post']['pid'])){echo $page['post']['pid'];} ?>"/>
 		<div class="top-bar"><h3><i class="icon-edit"></i> New Paste</h3></div>
 		<div class="well">
 			<div class="btn-toolbar">
@@ -159,7 +160,10 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 				</div>
 			</div>
 			
-			<textarea id="code" name="code2" onkeydown="return catchTab(this,event)"><?php echo htmlspecialchars($page['post']['editcode']) ?></textarea>
+			<textarea id="code" name="code2" onkeydown="return catchTab(this,event)">
+                <?php if(isset($page['post']['editcode'])){
+                        echo htmlspecialchars($page['post']['editcode']);
+                    } ?></textarea>
 			
 		</div>
 
@@ -171,7 +175,10 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 			<div class="controls">
 				<div class="input-icon left">
 					<i class="icon-edit"></i>
-					<input class="m-wrap" type="text" maxlength="24" id="poster" name="poster" value="<?php echo $page['poster'] ?>">    
+					<input class="m-wrap" type="text" maxlength="24" id="poster" name="poster" value="<?php 
+                    $page['poster']="";
+                    if(isset($_POST['poster'])){ $page['poster']=$_POST['poster']; }
+                    echo $page['poster'] ?>">    
 				</div>
 			</div>
 		</div>
@@ -220,7 +227,7 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 			<div class="well no-padding" id="pagination-activity">
 				<div class="list-widget pagination-content">
 				<?php foreach($page['recent'] as $idx=>$entry) {
-					if ($entry['pid']==$pid) $cls="background-color: #e0e0e0;";
+					if (isset($pid) && $entry['pid']==$pid) $cls="background-color: #e0e0e0;";
 					else $cls="";?>
 				<div class="item" style="display: block; <?php echo $cls;?>">
 					<small class="pull-right"><?php echo $entry['agefmt'];?></small>
