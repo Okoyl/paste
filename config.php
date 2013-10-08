@@ -299,7 +299,7 @@ $CONF['geshiformats']=array(
 $CONF['popular_formats']=array(
 	'text','diff','html4strict','html5','css','javascript','php',
 	'perl','python','postgresql','sql','ruby','rails','tcl','xml',
-	'whois','xorg_conf','java','apt_sources','mirc','c','csharp','cpp',
+	'whois','xorg_conf','java','apt_sources','c','csharp','cpp',
 );
 
 /*
