@@ -309,5 +309,6 @@ But, we've kept this here if you wish to change the prefix, you can change the v
 Don't forget to change 11 (the length of the default prefix) to the new length of the prefix you wish to use.
 -->*/ $CONF['highlight_prefix']='!highlight!';
 
+$CONF['diff_url']='';
 // END OF CONFIGURATION FILE
 ?>

@@ -29,9 +29,9 @@ You can find support on IRC by connecting to irc.collectiveirc.net in channel #P
 
 * CREDITS
 Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
-Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, 
+Jorge PeÃ±a (http://www.blaenkdenum.com) for making numerous changes to the older source, 
 (archives which are now being reworked on and password protection)
-Roberto Rodríguez (rodpin@gmail.com) for PostgreSQL support.
+Roberto RodrÃ­guez (roberto.rodriguez.pino@gmail.com) for PostgreSQL support.
 
 jQuery, Twitter Bootstrap and various jQuery addons for present and future features.
 Icons are provided by fontawesome.
