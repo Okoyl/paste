@@ -1,0 +1,7 @@
+- Admin backend (site settings, user manager, spam manager)
+- User accounts (also hook Facebook/Twitter accounts)
+- Trends
+- Public archive
+- Better password encryption, added paste encryption.
+- Added database support, ie SQLITE
+- Themes
