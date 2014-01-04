@@ -1,7 +1,7 @@
 #Paste 2.0
 
 ##Demo
- http://phpaste.sourceforge.net/demo/
+	http://phpaste.sourceforge.net/demo/
 
 
 ##Requirements: Apache + PHP + MySQL or PostgreSQL
