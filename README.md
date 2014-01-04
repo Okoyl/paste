@@ -10,12 +10,12 @@
 * Create a database for PASTE.
 * Upload all files to a webfolder
 * Point your browser to http://yoursite/<subdir?>/install
-* Make sure config.php has write permissions (chmod 777)
-* Input some settings, delete the install folder, revert config.php back to previous file permissions and you're ready to go.
+* Input some settings, copy & paste the generated config into config.php, DELETE the install folder and you're ready to go.
 
 ##Manual Install
 * Create a database for PASTE.
 * Add the tables to the database (located in sql files, match the file to your DB software)
+* Edit config.edit.php and rename to config.php
 ----------------------------------------------------------
 
 The configuration file is pretty well documented (config.php)
