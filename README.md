@@ -36,6 +36,8 @@ or
 * Sign up with Facebook/Twitter
 * Added some more themes, including Pastebinv2 (the current pastebin.com theme)
 * Added an installer to create tables (only MySQL supported at the moment) and generate a config file
+##Still to come
+* Image pastes
 	
 You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
 
