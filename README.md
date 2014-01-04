@@ -19,10 +19,13 @@ Any bugs can be reported at:
 or 
  http://bitbucket.org/j-samuel/paste/issues/new/
 
-##Changelog
-* Sleek new theme built using jQuery & Bootstrap
-* Passwords are no longer stored as plain text (in the future pastes won't be either)
-* Links are no longer broken if htaccess/mod_rewrite isn't available (see config)
+##Changelog (2.0)
+* Fully designed admin panel to delete pastes, manage users & site settings
+* User dashboard to manage pastes & view insights
+* Ability to comment on pastes
+* Trends, archive, raw, stats & search pages
+* Sign up with Facebook/Twitter
+* Added some more themes, including Pastebinv2 (the current pastebin.com theme)
 	
 Over the coming months we should see the placeholder
 folders & files filled with new features.
