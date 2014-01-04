@@ -6,7 +6,7 @@
 
 ##Requirements: Apache + PHP + MySQL or PostgreSQL
 
-Manual Install
+##Manual Install
  * Create a database for PASTE.
  * Add the tables to the database (located in sql files, match the file to your DB software)
 ----------------------------------------------------------
