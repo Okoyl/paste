@@ -7,23 +7,24 @@
 ##Requirements: Apache + PHP + MySQL or PostgreSQL
 
 ##Installer
-* Upload all files to a webfolder
-* Point your browser to http://yoursite/<subdir?>/install
-* Make sure config.php has write permissions (chmod 777)
-* Input some settings, delete the install folder, revert config.php back to previous file permissions and you're ready to go.
+	* Create a database for PASTE.
+	* Upload all files to a webfolder
+	* Point your browser to http://yoursite/<subdir?>/install
+	* Make sure config.php has write permissions (chmod 777)
+	* Input some settings, delete the install folder, revert config.php back to previous file permissions and you're ready to go.
 
 ##Manual Install
- * Create a database for PASTE.
- * Add the tables to the database (located in sql files, match the file to your DB software)
+	* Create a database for PASTE.
+	* Add the tables to the database (located in sql files, match the file to your DB software)
 ----------------------------------------------------------
 
 The configuration file is pretty well documented (config.php)
 so you shouldn't have any problems with it.
   
 Any bugs can be reported at:
- https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
+	https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
 or 
- http://bitbucket.org/j-samuel/paste/issues/new/
+	http://bitbucket.org/j-samuel/paste/issues/new/
 
 ##Changelog (2.0)
 * Fully designed admin panel to delete pastes, manage users & site settings
