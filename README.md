@@ -23,7 +23,7 @@ so you shouldn't have any problems with it.
   
 Any bugs can be reported at:
 
-	https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
+	https://sourceforge.net/p/phpaste/bugs/
 or 
 
 	http://bitbucket.org/j-samuel/paste/issues/new/
