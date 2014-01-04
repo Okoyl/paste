@@ -22,9 +22,11 @@ The configuration file is pretty well documented (config.php)
 so you shouldn't have any problems with it.
   
 Any bugs can be reported at:
-		https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
+
+	https://sourceforge.net/tracker/?func=add&group_id=310876&atid=1308834
 or 
-		http://bitbucket.org/j-samuel/paste/issues/new/
+
+	http://bitbucket.org/j-samuel/paste/issues/new/
 
 ##Changelog (2.0)
 * Fully designed admin panel to delete pastes, manage users & site settings
@@ -35,7 +37,7 @@ or
 * Added some more themes, including Pastebinv2 (the current pastebin.com theme)
 * Added an installer to create tables (only MySQL supported at the moment) and generate a config file
 	
-	You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
+You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
 
 ##Credits
  * Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
