@@ -53,8 +53,7 @@ Changelog (2.0)
 Credits
 =======
 * Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
-* Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, 
-(archives which are now being reworked on and password protection)
+* Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, (archives which are now being reworked on and password protection)
 * Roberto Rodríguez (roberto.rodriguez.pino@gmail.com) for PostgreSQL support.
 
 jQuery, Twitter Bootstrap and various jQuery addons for present and future features.
