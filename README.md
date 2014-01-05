@@ -3,6 +3,7 @@
 ##Demo
 	http://phpaste.sourceforge.net/demo/
 
+.. image:: http://i.imgur.com/8fqrIan.png
 
 ##Requirements: Apache + PHP + MySQL or PostgreSQL
 
