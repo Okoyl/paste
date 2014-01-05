@@ -2,6 +2,7 @@
 Welcome to Paste 2.0
 ====================
 Forked from the original source pastebin.com used before it was baught.
+
 A demo is available `here <http://phpaste.sourceforge.net/demo>`_
 =========================
 
