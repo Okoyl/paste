@@ -1,7 +1,7 @@
-=========
-Paste 2.0
-=========
-
+====================
+Welcome to Paste 2.0
+====================
+Forked from the original source pastebin.com used before it was baught.
 A demo is available `here <http://phpaste.sourceforge.net/demo>`_
 =========================
 
@@ -23,18 +23,19 @@ Manual Install
 * Create a database for PASTE.
 * Add the tables to the database (located in sql files, match the file to your DB software)
 * Edit config.edit.php and rename to config.php
-----------------------------------------------------------
 
 The configuration file is pretty well documented (config.php)
 so you shouldn't have any problems with it.
   
 Any bugs can be reported at:
-
-	https://sourceforge.net/p/phpaste/bugs/
+https://sourceforge.net/p/phpaste/bugs/
 or 
+http://bitbucket.org/j-samuel/paste/issues/new/
 
-	http://bitbucket.org/j-samuel/paste/issues/new/
-	
+You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
+
+-----------------------------------------------------------------------------------------------------
+
 ===============
 Changelog (2.0)
 ===============
@@ -46,14 +47,14 @@ Changelog (2.0)
 * Added some more themes, including Pastebinv2 (the current pastebin.com theme)
 * Added an installer to create tables (only MySQL supported at the moment) and generate a config file
 	
-You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
+-----------------------------------------------------------------------------------------------------
 
 Credits
 =======
- * Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
- * Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, 
- (archives which are now being reworked on and password protection)
- * Roberto Rodríguez (roberto.rodriguez.pino@gmail.com) for PostgreSQL support.
+* Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
+* Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, 
+(archives which are now being reworked on and password protection)
+* Roberto Rodríguez (roberto.rodriguez.pino@gmail.com) for PostgreSQL support.
 
 jQuery, Twitter Bootstrap and various jQuery addons for present and future features.
 Icons are provided by fontawesome.
