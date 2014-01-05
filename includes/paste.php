@@ -40,7 +40,7 @@ class Pastebin
 				$delete_count=$this->db->getPasteCount($this->conf['max_posts']);
 				if ($delete_count>0)
 				{
-					$this->db->trimDomainPastes($delete_count);
+					$this->db->trimPastes($delete_count);
 				}
 			}
 			
@@ -82,10 +82,10 @@ class Pastebin
 			$data=array();
 			
 			//blow apart the cookie
-			list($poster,$last_format,$last_expiry)=explode('#', $_COOKIE["persistName"]);
+			list($title,$last_format,$last_expiry)=explode('#', $_COOKIE["persistName"]);
 			
 			//clean and validate the cookie inputs
-			$data['poster']=$this->_cleanUsername($poster);
+			$data['title']=$this->_cleanUsername($title);
 			$data['last_format']=$this->_cleanFormat($last_format);
 			$data['last_expiry']=$this->_cleanFormat($last_expiry);
 		}
@@ -109,14 +109,14 @@ class Pastebin
       }
       
 		// Validate some inputs.
-		$post["poster"]=$this->_cleanUsername($post["poster"]);
+		$post["title"]=$this->_cleanUsername($post["title"]);
 		$post["format"]=$this->_cleanFormat($post["format"]);
 		$post["expiry"]=$this->_cleanExpiry($post["expiry"]);
 			
 		// Set/clear the persistName cookie.
 		if (isset($post["remember"]))
 		{
-			$value=$post["poster"].'#'.$post["format"].'#'.$post['expiry'];
+			$value=$post["title"].'#'.$post["format"].'#'.$post['expiry'];
 			
 			// Set cookie if not set.
 			if (!isset($_COOKIE["persistName"]) || 
@@ -131,10 +131,10 @@ class Pastebin
 		}
 		
 		if (strlen($post['code2'])) {
-			$poster=preg_replace('/[^A-Za-z0-9_ \-]/', '',$post['poster']);
-			$poster=$post['poster'];
-			if (strlen($poster)==0)
-				$poster='Untitled';
+			$title=preg_replace('/[^A-Za-z0-9_ \-]/', '',$post['title']);
+			$title=$post['title'];
+			if (strlen($title)==0)
+				$title='Untitled';
 			
 			$format=$post['format'];
 			if (!array_key_exists($format, $this->conf['geshiformats']))
@@ -154,7 +154,7 @@ class Pastebin
 			if (isset($post["parent_pid"]))
 				$parent_pid=intval($post["parent_pid"]);
 				
-			$id=$this->db->addPost($poster,$format,$code,$parent_pid,$post["expiry"],$password);
+			$id=$this->db->addPost($title,$format,$code,$parent_pid,$post["expiry"],$password);
 		}
 		else {
 			$this->errors[]="Please specify a paste to submit.";
@@ -225,7 +225,7 @@ class Pastebin
 			
 			// Download
 			header('Content-type: text/plain');
-			header('Content-Disposition: attachment; filename="'.$post['poster'].'.'.$ext.'"');
+			header('Content-Disposition: attachment; filename="'.$post['title'].'.'.$ext.'"');
 			echo $post['code'];
 			$ok=true;
 		}
@@ -237,7 +237,7 @@ class Pastebin
 		return $ok;
 	}
 	
-	// Returns array of post summaries, each element has: url, poster, age. parameter is a count or 0 for all
+	// Returns array of post summaries, each element has: url, title, age. parameter is a count or 0 for all
 	function getRecentPosts($list=10)
 	{
 		// Get raw db info.
@@ -274,9 +274,9 @@ class Pastebin
 		$post=$this->db->getPaste($pid);
 		if ($post)
 		{
-			// Show a quick reference url, poster and parents.        
+			// Show a quick reference url, title and parents.        
          $expires = ((is_null($post['expires'])) ? " (Never Expires) " : (" - Expires on " . date("D, F jS @ g:ia", strtotime($post['expires']))));
-			$post['posttitle']="<b>{$post['poster']}</b> - Posted on {$post['postdate']} {$expires}";
+			$post['posttitle']="<b>{$post['title']}</b> - Posted on {$post['postdate']} {$expires}";
 			
 			if ($post['parent_pid']>0)
 			{
@@ -285,7 +285,7 @@ class Pastebin
 				$parent=$this->db->getPaste($parent_pid);
 				if ($parent)
 				{
-					$post['parent_poster']=$parent['poster'];
+					$post['parent_title']=$parent['title'];
 					$post['parent_url']=$this->getPasteUrl($parent_pid);
 					$post['parent_postdate']=$parent['postdate'];
 					$post['parent_diffurl']=$this->conf['diff_url']."$pid";

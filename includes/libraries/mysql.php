@@ -40,12 +40,12 @@ class DB
     }
     
     // Delete oldest $deletecount pastes from the database.
-    function trimDomainPastes($deletecount)
+    function trimPastes($deletecount)
     {
     	// Build a one-shot statement to delete old pastes
 		$sql='delete from paste where pid in (';
 		$sep='';
-		$this->_query("select * from paste order by posted asc limit $deletecount", $subdomain);
+		$this->_query("select * from paste order by posted asc limit $deletecount");
 		while ($this->_next_record())
 		{
 			$sql.=$sep.$this->_f('pid');
@@ -64,7 +64,7 @@ class DB
     }
     
     // Add paste and return ID.
-    function addPost($poster,$format,$code,$parent_pid,$expiry_flag,$password)
+    function addPost($title,$format,$code,$parent_pid,$expiry_flag,$password)
     {
     	//figure out expiry time
     	switch ($expiry_flag)
@@ -79,9 +79,9 @@ class DB
     			$expires="DATE_ADD(NOW(), INTERVAL 1 MONTH)";
     			break;	
     	}
-    	$this->_query('insert into paste (poster, posted, format, code, parent_pid, expires, expiry_flag, password) '.
+    	$this->_query('insert into paste (title, posted, format, code, parent_pid, expires, expiry_flag, password) '.
 				"values (?, now(), ?, ?, ?, $expires, ?, ?)",
-				$poster,$format,$code,$parent_pid,$expiry_flag,$password);	
+				$title,$format,$code,$parent_pid,$expiry_flag,$password);	
 		$id=$this->_get_insert_id();	
 		return $id;
     }
@@ -103,7 +103,7 @@ class DB
     	$limit=$count?"limit $count":"";
     	
     	$posts=array();
-    	$this->_query("select pid,poster,unix_timestamp()-unix_timestamp(posted) as age, ".
+    	$this->_query("select pid,title,unix_timestamp()-unix_timestamp(posted) as age, ".
 			"date_format(posted, '%a %D %b %H:%i') as postdate ".
 			"from paste ".
 			"order by posted desc, pid desc $limit");
@@ -120,7 +120,7 @@ class DB
     {
     	//any amendments?
 		$childposts=array();
-		$this->_query("select pid,poster,".
+		$this->_query("select pid,title,".
 			"date_format(posted, '%a %D %b %H:%i') as postfmt ".
 			"from paste where parent_pid=? ".
 			"order by posted limit $limit", $pid);

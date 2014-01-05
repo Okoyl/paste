@@ -47,12 +47,12 @@ class DB
     }
     
     // Delete oldest $deletecount pastes from the database.
-    function trimDomainPastes($deletecount)
+    function trimPastes($deletecount)
     {
     	// Build a one-shot statement to delete old pastes
 		$sql='delete from paste where pid in (';
 		$sep='';
-		$this->_query("select * from paste order by posted asc limit $deletecount", $subdomain);
+		$this->_query("select * from paste order by posted asc limit $deletecount");
 		while ($this->_next_record())
 		{
 			$sql.=$sep.$this->_f('pid');
