@@ -7,8 +7,8 @@ $page['post']['editcode']=$_POST['code2'];
 $page['current_format']=$_POST['format'];
 $page['expiry']=$_POST['expiry'];
 	if ($_POST['password'] != 'EMPTY') { $page['post']['password']=$_POST['password']; }
-$page['poster']="";
-if(isset($_POST['poster'])){ $page['poster']=$_POST['poster']; }
+$page['title']="";
+if(isset($_POST['title'])){ $page['title']=$_POST['title']; }
 
 }
 
@@ -23,7 +23,7 @@ function showMe() {
 	if (strlen($page['post']['posttitle'])) { echo '<div class="alert alert-light">' . $page['post']['posttitle'] . ' - Format: ' . ($page['post']['format']) . '';
 	
 		if ($page['post']['parent_pid']>0) {
-			echo ' - This is a modified post titled "<a href="' . $page['post']['parent_url'] . '" title="View original post">' . $page['post']['parent_poster'] . '</a>".';
+			echo ' - This is a modified post titled "<a href="' . $page['post']['parent_url'] . '" title="View original post">' . $page['post']['parent_title'] . '</a>".';
 		}
 
 		$followups=count($page['post']['followups']);
@@ -31,7 +31,7 @@ function showMe() {
 			echo ' - See newer version(s) of this paste titled ';
 			$sep="";
 			foreach($page['post']['followups'] as $idx=>$followup) {
-				echo $sep . '<a title="Posted on ' . $followup['postfmt'] . '" href="' . $followup['followup_url'] . '">"' . $followup['poster'] . '"</a>';
+				echo $sep . '<a title="Posted on ' . $followup['postfmt'] . '" href="' . $followup['followup_url'] . '">"' . $followup['title'] . '"</a>';
 				$sep=($idx<($followups-2))?", ":" and ";
 				}
 			}
@@ -175,10 +175,10 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 			<div class="controls">
 				<div class="input-icon left">
 					<i class="icon-edit"></i>
-					<input class="m-wrap" type="text" maxlength="24" id="poster" name="poster" value="<?php 
-                    $page['poster']="";
-                    if(isset($_POST['poster'])){ $page['poster']=$_POST['poster']; }
-                    echo $page['poster'] ?>">    
+					<input class="m-wrap" type="text" maxlength="24" id="title" name="title" value="<?php 
+                    $page['title']="";
+                    if(isset($_POST['title'])){ $page['title']=$_POST['title']; }
+                    echo $page['title'] ?>">    
 				</div>
 			</div>
 		</div>
@@ -233,8 +233,8 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") {?>
 					<small class="pull-right"><?php echo $entry['agefmt'];?></small>
 					<p class="no-margin"><i class="icon-code"></i>
 					<?php if ( $mod_rewrite == true ) { 
-					echo '<a href="'. $CONF['url'] . $entry['pid'] . '">' . $entry['poster'] . '</a>'; } else { 
-					echo '<a href="'. $CONF['url'] .'?paste='. $entry['pid'].'">' . $entry['poster'] . '</a>'; } ?>
+					echo '<a href="'. $CONF['url'] . $entry['pid'] . '">' . $entry['title'] . '</a>'; } else { 
+					echo '<a href="'. $CONF['url'] .'?paste='. $entry['pid'].'">' . $entry['title'] . '</a>'; } ?>
 					</p>
 				</div>
 			<?php } ?>
