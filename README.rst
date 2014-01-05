@@ -1,16 +1,17 @@
 ====================
 Welcome to Paste 2.0
 ====================
-Forked from the original source pastebin.com used before it was baught.
+Paste is forked from the original source pastebin.com used before it was bought.
+The original source is available from the previous owner's `GitHub repository <https://github.com/lordelph/pastebin>`_
 
-A demo is available `here <http://phpaste.sourceforge.net/demo>`_
-=========================
+A demo of Paste is available `here on SourceForge for your convenience <http://phpaste.sourceforge.net/demo>`_
+======================================================================
 
 
 .. image:: http://i.imgur.com/8fqrIan.png
 
 Requirements: Apache + PHP + MySQL or PostgreSQL
-=============
+================================================
 
 Installer
 =========
