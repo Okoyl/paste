@@ -1,6 +1,6 @@
 CREATE TABLE "paste" (
   "pid" serial NOT NULL,
-  "poster" varchar(16) default NULL,
+  "title" varchar(16) default NULL,
   "posted" timestamp default NULL,
   "code" text,
   "parent_pid" integer default '0',

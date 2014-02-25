@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `paste` (
   `pid` int(11) NOT NULL auto_increment,
-  `poster` varchar(16) default NULL,
+  `title` varchar(16) default NULL,
   `posted` datetime default NULL,
   `code` text,
   `parent_pid` int(11) default '0',
