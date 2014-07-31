@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+
 .dropdown-menu > .active > a, 
 .dropdown-menu > .active > a:hover, 
 .dropdown-menu > .active > a:focus,
@@ -11,4 +13,5 @@ textarea{
   width: 96.9%; 
   height:350px; 
   resize: none;
+  font-family: "Droid Sans Mono";
 }
