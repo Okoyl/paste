@@ -1,6 +1,6 @@
-====================
-Welcome to Paste 2.0
-====================
+=============
+This is Paste (In Development)
+=============
 Paste is forked from the original source pastebin.com used before it was bought.
 The original source is available from the previous owner's `GitHub repository <https://github.com/lordelph/pastebin>`_
 
@@ -13,7 +13,7 @@ A demo of Paste is available `here on SourceForge for your convenience <http://p
 Requirements: Apache + PHP + MySQL or PostgreSQL
 ================================================
 
-Installer
+Installer (In Development)
 =========
 * Create a database for PASTE.
 * Upload all files to a webfolder
@@ -39,15 +39,14 @@ You can find support on IRC by connecting to irc.collectiveirc.net in channel #P
 -----------------------------------------------------------------------------------------------------
 
 ===============
-Changelog (2.0)
+TODO (for version 2)
 ===============
-* Fully designed admin panel to delete pastes, manage users & site settings
-* User dashboard to manage pastes & view insights
-* Ability to comment on pastes
+* Integrate an admin panel (delete user pastes, manage site configuration) and a user dashboard
+  (user registration, insights, modify/delete pastes [...] 
+* Add ability to comment on pastes
 * Trends, archive, raw, stats & search pages
-* Sign up with Facebook/Twitter
-* Added some more themes, including Pastebinv2 (the current pastebin.com theme)
-* Added an installer to create tables (only MySQL supported at the moment) and generate a config file
+* Social integration (create accounts with Facebook, Twitter etc)
+* Create an installer
 	
 -----------------------------------------------------------------------------------------------------
 
