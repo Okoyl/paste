@@ -30,8 +30,6 @@ The configuration file is pretty well documented (config.php)
 so you shouldn't have any problems with it.
   
 Any bugs can be reported at:
-https://sourceforge.net/p/phpaste/bugs/
-or 
 http://bitbucket.org/j-samuel/paste/issues/new/
 
 You can find support on IRC by connecting to irc.collectiveirc.net in channel #PASTE
@@ -52,7 +50,8 @@ TODO (for version 2)
 
 Credits
 =======
-  Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
+  Paul Dixon (`blog.dixo.net <http://blox.dixo.net>`) for developing `the original pastebin.com <https://github.com/lordelph/pastebin>`
+
   Roberto Rodríguez (roberto.rodriguez.pino[AT]gmail.com) for PostgreSQL support.
 
   Themes were built using jQuery &  Twitter Bootstrap and various jQuery plugins for
