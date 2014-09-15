@@ -50,10 +50,9 @@ TODO (for version 2)
 
 Credits
 =======
-  Paul Dixon (`blog.dixo.net <http://blox.dixo.net>`) for developing `the original pastebin.com <https://github.com/lordelph/pastebin>`
+Paul Dixon (`blog.dixo.net <http://blox.dixo.net>`) for developing `the original pastebin.com <https://github.com/lordelph/pastebin>`
+Roberto Rodríguez (roberto.rodriguez.pino[AT]gmail.com) for PostgreSQL support.
 
-  Roberto Rodríguez (roberto.rodriguez.pino[AT]gmail.com) for PostgreSQL support.
-
-  Themes were built using jQuery &  Twitter Bootstrap and various jQuery plugins for
-  present and future features, but we do try to keep it bloat free.
-  Icons are provided by FontAwesome.
+Themes were built using jQuery &  Twitter Bootstrap and various jQuery plugins for
+present and future features, but we do try to keep it bloat free.
+Icons are provided by FontAwesome.
