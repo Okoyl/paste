@@ -1,10 +1,10 @@
-=============
+==============================
 This is Paste (In Development)
-=============
+==============================
 Paste is forked from the original source pastebin.com used before it was bought.
 The original source is available from the previous owner's `GitHub repository <https://github.com/lordelph/pastebin>`_
 
-A demo of Paste is available `here on SourceForge for your convenience <http://phpaste.sourceforge.net/demo>`_
+A demo of Paste is available on our homepage at `SourceForge <http://phpaste.sourceforge.net/demo>`_
 ======================================================================
 
 
@@ -38,9 +38,9 @@ You can find support on IRC by connecting to irc.collectiveirc.net in channel #P
 
 -----------------------------------------------------------------------------------------------------
 
-===============
+====================
 TODO (for version 2)
-===============
+====================
 * Integrate an admin panel (delete user pastes, manage site configuration) and a user dashboard
   (user registration, insights, modify/delete pastes [...] 
 * Add ability to comment on pastes
@@ -52,9 +52,9 @@ TODO (for version 2)
 
 Credits
 =======
-* Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
-* Jorge Peña (http://www.blaenkdenum.com) for making numerous changes to the older source, (archives which are now being reworked on and password protection)
-* Roberto Rodríguez (roberto.rodriguez.pino@gmail.com) for PostgreSQL support.
+  Paul Dixon (blog.dixo.net) for creating the original pastebin.com source.
+  Roberto Rodríguez (roberto.rodriguez.pino[AT]gmail.com) for PostgreSQL support.
 
-jQuery, Twitter Bootstrap and various jQuery addons for present and future features.
-Icons are provided by fontawesome.
+  Themes were built using jQuery &  Twitter Bootstrap and various jQuery plugins for
+  present and future features, but we do try to keep it bloat free.
+  Icons are provided by FontAwesome.
