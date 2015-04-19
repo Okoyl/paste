@@ -1,5 +1,6 @@
 ==============================
 This is Paste (In Development)
+** If you would like to contribute with developing Paste please feel free to find me on IRC. 
 ==============================
 Paste is forked from the original source pastebin.com used before it was bought.
 The original source is available from the previous owner's `GitHub repository <https://github.com/lordelph/pastebin>`_
