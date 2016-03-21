@@ -32,7 +32,7 @@ $CONF['url']='http://pastethis.in/'; // Make sure you end it with a slash! (/)
 $CONF['sitetitle']='Paste 2.0';
 
 // Enable mod_rewrite? remember to move htaccess.txt to .htaccess!
-$mod_rewrite=false;
+$CONF['mod_rewrite']=$mod_rewrite=false;
 
 // What is the name of the template you want to use for the frontend (the folder name as displayed in /templates/)
 $CONF['template']='default';
