@@ -1,4 +1,4 @@
-<?php
+[B<?php
 /*
 * $ID Project: Paste 2.0 - J.Samuel - 29/09/2013 @ 04:11 (Coffee please!)
 * This is the configuration file for paste. See /docs for more information.
@@ -20,8 +20,11 @@ $CONF['dbname']='pastedev';
 $CONF['dbuser']='user';
 $CONF['dbpass']='password';
 
-// These extra databases are supported: postgresql
-$CONF['dbsoftware']='mysql';
+// Default sqlite3 db file
+$CONF['sqlitefile']='database/database.db';
+
+// These extra databases are supported: postgresql mysql mysqli postgre sqlite
+$CONF['dbsoftware']='sqlite';
 
 // This should be the entire URL to your PASTE installation.
 $CONF['url']='http://pastethis.in/'; // Make sure you end it with a slash! (/)

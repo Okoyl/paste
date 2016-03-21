@@ -26,5 +26,11 @@ switch($CONF['dbsoftware']){
     case "mysql":
         require_once('libraries/mysql.php');
         break;
+    case "mysqli":
+        require_once('libraries/mysqli.php');
+        break;
+    case "sqlite":
+    	require_once('libraries/sqlite.php');
+    	break;
 }
 ?>
