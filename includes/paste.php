@@ -165,7 +165,7 @@ class Pastebin
 	function getPasteURL($id)
 	{
 		global $CONF;
-		if ( isset($mod_rewrite) && $mod_rewrite == true ) { 
+		if ( isset($CONF['mod_rewrite']) && $CONF['mod_rewrite'] == true ) {
             return sprintf($this->conf['pid_format'], $id); 
         } else {
             return sprintf("./?paste=".$this->conf['pid_format'], $id);
@@ -236,7 +236,68 @@ class Pastebin
 		}
 		return $ok;
 	}
-	
+
+	function doDisplay($pid)
+	{
+		$ok=false;
+		$post=$this->db->getPaste($pid);
+		if ($post)
+		{
+			// Figure out extensions.
+			$ext="txt";
+			switch($post['format'])
+			{
+				case 'bash':
+					$ext='sh';
+					break;
+				case 'actionscript':
+					$ext='html';
+					break;
+				case 'html4strict':case 'html5':
+					$ext='html';
+					break;
+				case 'javascript':
+					$ext='js';
+					break;
+				case 'perl':
+					$ext='pl';
+					break;
+				case 'csharp':
+					$ext='cs';
+					break;
+				case 'ruby':
+					$ext='rb';
+					break;
+				case 'python':
+					$ext='py';
+				case 'sql':
+					$ext='sql';
+					break;
+				case 'php':
+				case 'c':
+				case 'cpp':
+				case 'css':
+				case 'xml':
+				case 'asm':
+					$ext=$post['format'];
+					break;
+			}
+
+			// Download
+			header('Content-type: text/html');
+			//header('Content-Disposition: attachment; filename="'.$post['title'].'.'.$ext.'"');
+			echo $post['code'];
+			$ok=true;
+		}
+		else
+		{
+			//not found
+			header('HTTP/1.0 404 Not Found');
+		}
+		return $ok;
+	}
+
+
 	// Returns array of post summaries, each element has: url, title, age. parameter is a count or 0 for all
 	function getRecentPosts($list=10)
 	{

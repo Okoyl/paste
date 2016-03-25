@@ -65,6 +65,7 @@ if (isset($_GET['dl']))
     $result = $pastebin->getPaste($pid);
    
    if ($result == FALSE) {
+	   header('HTTP/1.0 404 Not Found');
       echo "Paste $pid is not available.";
       exit;
    }
@@ -74,14 +75,42 @@ if (isset($_GET['dl']))
       $pastebin->doDownload($pid);
 	  exit;
    }
-   
-   else if ($pass != $getPass) {}
-   
-   else {
+
+   else if ($pass == $getPass){
       $pastebin->doDownload($pid);
 	  exit;
    }
 }
+
+
+// Process raw display requets.
+if (isset($_GET['rw']))
+{
+	global $errors;
+	if (isset($_GET['pass']))
+		$getPass = $_GET['pass'];
+	$pid=intval($_GET['rw']);
+	$result = $pastebin->getPaste($pid);
+
+	if ($result == FALSE) {
+		header('HTTP/1.0 404 Not Found');
+		echo "Paste $pid is not available.";
+		exit;
+	}
+	$pass = $result['password'];
+
+	if ($pass == 'EMPTY') {
+		$pastebin->doDisplay($pid);
+		exit;
+	}
+	else if($pass == $getPass){
+		$pastebin->doDisplay($pid);
+		exit;
+	}
+}
+
+
+
 
 // If we get this far, we're going to be displaying some HTML, so let's kick off here.
 $page=array();

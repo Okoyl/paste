@@ -1,4 +1,4 @@
-[B<?php
+<?php
 /*
 * $ID Project: Paste 2.0 - J.Samuel - 29/09/2013 @ 04:11 (Coffee please!)
 * This is the configuration file for paste. See /docs for more information.
