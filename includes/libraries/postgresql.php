@@ -105,7 +105,35 @@ class DB
     		return false;
 		
     }
-    
+	function getPostSummary($title = null, $code = null, $format = null, $count = 10)
+	{
+		$limit = $count ? "limit $count" : "";
+		$where = "";
+		if ($title || $code || $format) {
+			$where = [];
+			if ($title) {
+				array_push($where, 'title LIKE "%' . preg_quote(pg_escape_string($title)) . '%"');
+			}
+			if ($code) {
+				array_push($where, 'code LIKE "%' .preg_quote(pg_escape_string( $code )). '%"');
+			}
+			if ($format) {
+				array_push($where, 'format LIKE "%' . preg_quote(pg_escape_string($format)) . '%"');
+			}
+			$where="where ".implode(" OR ",$where);
+		}
+
+		$posts = array();
+		$this->_query("select pid, title, extract(epoch from now())-extract(epoch from posted) as age, ".
+			"posted as postdate ".
+			"from paste ". $where .
+			"order by posted desc, pid desc $limit");
+		while ($this->_next_record()) {
+			$posts[] = $this->row;
+		}
+
+		return $posts;
+	}
     // Return summaries for $count posts ($count=0 means all)
     function getRecentPostSummary($count)
     {

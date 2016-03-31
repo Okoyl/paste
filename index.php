@@ -130,6 +130,7 @@ if (isset($_REQUEST["paste"]))
 	$pid=intval($_REQUEST['paste']);
 	// Get the post.
 	$page['post']=$pastebin->getPaste($pid);
+
 	// Ensure corrent format is selected.
 	$page['current_format']=$page['post']['format'];
 }

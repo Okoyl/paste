@@ -32,8 +32,7 @@ class Pastebin
 	// Has a 5% probability of cleaning old posts from the database
 	function doGarbageCollection()
 	{
-		if(rand()%100 < 5)
-		{
+
 			// Is there a limit on the number of posts?
 			if ($this->conf['max_posts'])
 			{
@@ -46,7 +45,7 @@ class Pastebin
 			
 			// Delete expired posts
 			$this->db->deleteExpiredPastes();
-		}
+
 	}
 	
 	// Private method for validating a user-submitted username
@@ -297,7 +296,36 @@ class Pastebin
 		return $ok;
 	}
 
+//getPostSummary($title = null, $code = null, $format = null, $count = 10)
 
+	function getQueryResults($title,$code,$format,$list=10)
+	{
+		// Get raw db info.
+		$posts=$this->db->getPostSummary($title,$code,$format,$list);
+		// Augment with some formatting
+		foreach($posts as $idx=>$post)
+		{
+			$age=$post['age'];
+			$days=floor($age/(3600*24));
+			$hours=floor($age/3600);
+			$minutes=floor($age/60);
+			$seconds=$age;
+
+			if ($days>1)
+				$age="$days days ago";
+			elseif ($hours>0)
+				$age="$hours hour".(($hours>1)?"s":"")." ago";
+			elseif ($minutes>0)
+				$age="$minutes minute".(($minutes>1)?"s":"")." ago";
+			else
+				$age="$seconds second".(($seconds>1)?"s":"")." ago";
+
+			$posts[$idx]['agefmt']=$age;
+
+		}
+
+		return $posts;
+	}
 	// Returns array of post summaries, each element has: url, title, age. parameter is a count or 0 for all
 	function getRecentPosts($list=10)
 	{

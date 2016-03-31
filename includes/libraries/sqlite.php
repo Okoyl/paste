@@ -63,7 +63,7 @@ class DB
     // Delete all expired pastes.
     function deleteExpiredPastes()
     {
-        $this->_query("delete from paste where expires is not null and strftime('%s','now') > expires");
+        $this->_query("delete from paste where expiry_flag is not \"f\" and expires is not null and  datetime('now')  >= expires");
     }
 
     // Add paste and return ID.
@@ -102,6 +102,32 @@ class DB
 
     }
 
+    function getPostSummary($title = null, $code = null, $format = null, $count = 10)
+    {
+        $limit = $count ? "limit $count" : "";
+        $where = "";
+        if ($title || $code || $format) {
+            $where = [];
+            if ($title) {
+                array_push($where, 'title LIKE "%' . $this->dblink->escapeString($title) . '%"');
+            }
+            if ($code) {
+                array_push($where, 'code LIKE "%' . $this->dblink->escapeString($code) . '%"');
+            }
+            if ($format) {
+                array_push($where, 'format LIKE "%' . $this->dblink->escapeString($format) . '%"');
+            }
+            $where = "where " . implode(" OR ", $where);
+        }
+        $posts = array();// CAST(strftime('%s', 'now') AS INT);
+        $this->_query("select pid,title,(select strftime('%s','now'))-posted as age, posted as postdate from paste " . $where . " order by posted desc, pid desc $limit");
+        while ($this->_next_record()) {
+            $posts[] = $this->row;
+        }
+        return $posts;
+    }
+
+
     // Return summaries for $count posts ($count=0 means all)
     function getRecentPostSummary($count)
     {
@@ -113,6 +139,7 @@ class DB
         }
         return $posts;
     }
+
 
     // Get follow up posts for a particular post
     function getFollowupPosts($pid, $limit = 5)

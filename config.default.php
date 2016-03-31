@@ -27,7 +27,7 @@ $CONF['sqlitefile']='database/database.db';
 $CONF['dbsoftware']='sqlite';
 
 // This should be the entire URL to your PASTE installation.
-$CONF['url']='http://localhost/paste/'; // Make sure you end it with a slash! (/)
+$CONF['url']='http://pastethis.in/'; // Make sure you end it with a slash! (/)
 // And the title
 $CONF['sitetitle']='Paste 2.0';
 

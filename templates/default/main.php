@@ -26,11 +26,10 @@ function showMe()
     global $post;
     global $followups;
     global $CONF;
-
     if (strlen($page['post']['posttitle'])) {
         echo '<div class="alert alert-light">' . $page['post']['posttitle'] . ' - Format: ' . ($page['post']['format']) . '';
 
-        if ($page['post']['parent_pid'] > 0) {
+        if (isset($page['post']['parent_url'])&&$page['post']['parent_pid'] > 0) {
             echo ' - This is a modified post titled "<a href="' . $page['post']['parent_url'] . '" title="View original post">' . $page['post']['parent_title'] . '</a>".';
         }
 
@@ -61,15 +60,18 @@ function showMe()
                 <li><a href="<?php echo $page['post']['downloadurl'] ?>"><i class="icon-download"></i> Download</a></li>
                 <li><a href="<?php echo  str_replace("dl=", "rw=", $page['post']['downloadurl'])  ?>"><i class="icon-search"></i> View</a></li>
                 <li><a href="javascript:togglev();" title="Show/Hide line numbers"><i class="icon-list-ul"></i></a></li>
-                <li><a href="#" class="copyme" onclick="selectText('code');showdiv('copied');"
+                <li><a href="#" class="copyme" onclick="if(navigator.appVersion.toLowerCase().indexOf('msie')!=-1||navigator.appVersion.toLowerCase().indexOf('trident')!=-1){ selectText('code2');}else{selectText('code'); }showdiv('copied');"
                        title="Copy text to clipboard"><i class="icon-copy"></i></a></li>
             </ul>
         </div>
     <?php } // End post title
 
     if (isset($page['post']['pid'])) { ?>
+
         <div class="well" style="background-color: #FFF;" id="code">
-            <?php echo $page['post']['codefmt']; ?>
+            <?php
+            echo $page['post']['codefmt'];
+            ?>
         </div>
         <div style="float:right; padding-bottom: 5px;">
             <script type="text/javascript"
@@ -175,11 +177,11 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") { ?>
                         </div>
 
                         <div class="btn-group">
-                            <a class="btn" onclick="highlight(document.getElementById('code')); return false;"><i
+                            <a class="btn" onclick="highlight(document.getElementById('code2')); return false;"><i
                                     class="icon-pencil"></i>Highlight Selection</a>
                         </div>
                     </div>
-			<textarea id="code" name="code2" onkeydown="return catchTab(this,event)"><?php
+			<textarea id="code2" name="code2" onkeydown="return catchTab(this,event)"><?php
 
                 if (isset($page['post']['editcode'])) {
                     echo htmlspecialchars($page['post']['editcode']);
@@ -215,7 +217,8 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") { ?>
                                            echo $postPass;
                                        } else {
                                            echo '';
-                                       } ?>" name="password">
+                                       }
+                                      ?>" name="password">
                             </div>
                         </div>
                     </div>
@@ -227,15 +230,15 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") { ?>
                                 <i class="icon-trash"></i>
                                 <select class="span3 m-wrap" name="expiry" tabindex="1">
                                     <option id="expiry_forever"
-                                            value="f" <?php if ($page['expiry'] == 'f') echo 'selected="selected"'; ?>>
+                                            value="f" <?php if (isset($page['post'][9])?$page['post'][9]=='f':$page['expiry'] == 'f') echo 'selected="selected"'; ?>>
                                         None
                                     </option>
                                     <option id="expiry_day"
-                                            value="d" <?php if ($page['expiry'] == 'd') echo 'selected="selected"'; ?>>
+                                            value="d" <?php if (isset($page['post'][9])?$page['post'][9]=='d':$page['expiry'] == 'd') echo 'selected="selected"'; ?>>
                                         One Day
                                     </option>
                                     <option id="expiry_month"
-                                            value="m" <?php if ($page['expiry'] == 'm') echo 'selected="selected"'; ?>>
+                                            value="m" <?php if (isset($page['post'][9])?$page['post'][9]=='m':$page['expiry'] == 'm') echo 'selected="selected"'; ?>>
                                         One Month
                                     </option>
                                 </select>
@@ -272,7 +275,7 @@ if (!(isset($pass) && (sha1($postPass) !== $pass)) || $pass == "EMPTY") { ?>
                     <div class="item" style="display: block; <?php echo $cls; ?>">
                         <small class="pull-right"><?php echo $entry['agefmt']; ?></small>
                         <p class="no-margin"><i class="icon-code"></i>
-                            <?php if ($mod_rewrite == true) {
+                            <?php if ($CONF['mod_rewrite'] == true) {
                                 echo '<a href="' . $CONF['url'] . $entry['pid'] . '">' . $entry['title'] . '</a>';
                             } else {
                                 echo '<a href="' . $CONF['url'] . '?paste=' . $entry['pid'] . '">' . $entry['title'] . '</a>';
