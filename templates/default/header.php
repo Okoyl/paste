@@ -70,7 +70,9 @@
 			</ul>
 			
 			<form action="search.php" method="POST" class="navbar-search pull-right">
-				<input type="text" class="search-query typeahead" placeholder="Search">
+				<input type="text" name="query" class="search-query typeahead" placeholder="Search">
+				<input type="hidden" name="query_type[]" value="title,code,format" />
+
 			</form>
 		</div>
 
